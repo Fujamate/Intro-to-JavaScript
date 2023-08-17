@@ -1,13 +1,6 @@
 let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
-let pokemonRepository =(function () {
-   let pokemonList = [
-      { name: 'Pikachu', height: 0.4, types: 'Electro'},
-      { name: 'Charmander', height: 0.6, types: 'Fire'},
-      { name: 'Bulbasaur', height: 0.7, types: 'Grass'},
-      { name: 'Arbok', height: 3.5, types: 'Poisen'},
-   ]
 
   // Other functions remain here
 
@@ -86,19 +79,7 @@ let pokemonRepository =(function () {
 })();
 
 pokemonRepository.loadList().then(function () {
-  // Now the data is loaded!
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
 });
-
-fetch("https://pokeapi.co/api/v2/pokemon/")
-  .then(function (response) {
-    return response.json(); // This returns a promise!
-  })
-  .then(function (pokemonList) {
-    console.log(pokemonList); // The actual JSON response
-  })
-  .catch(function () {
-    // Error
-  });
