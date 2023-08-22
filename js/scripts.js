@@ -4,11 +4,17 @@ let pokemonRepository = (function () {
 
   // populate the html with dynamic content from the pokemon list
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector("ul");
+    let pokemonList = document.querySelector(".pokemon-list");
     let listpokemon = document.createElement("li");
     let button = document.createElement("button");
+
     button.innerText = pokemon.name;
-    button.classList.add("button-class");
+    button.classList.add("btn");
+    button.classList.add("btn-primary");
+    button.setAttribute("data-target", "#pokemonModal"); // Set data-target attribute
+    button.setAttribute("data-toggle", "modal"); // Set data-toggle attribute
+
+    listpokemon.classList.add("list-group-item");
     listpokemon.appendChild(button);
     pokemonList.appendChild(listpokemon);
 
@@ -59,7 +65,9 @@ let pokemonRepository = (function () {
       .then(function (details) {
         item.imageUrl = details.sprites.front_default;
         item.height = details.height;
+        item.weight = details.weight;
         item.types = details.types;
+        item.abilities = details.abilities;
         hideLoadingMessage();
       })
       .catch(function (e) {
@@ -78,36 +86,33 @@ let pokemonRepository = (function () {
   //--------------- Modal Section ---------------
 
   // shows the modal and populate it with dynamic content
-  function showModal(pokemon) {
-    let modalContainer = document.getElementById("modal-container");
-    let modalName = document.getElementById("modal-name");
-    let modalHeight = document.getElementById("modal-height");
-    let modalImage = document.getElementById("modal-image");
 
-    modalName.textContent = `Name: ${pokemon.name}`;
-    modalHeight.textContent = `Height: ${pokemon.height}`;
-    modalImage.src = pokemon.imageUrl;
+  function showModal(item) {
+    let modalBody = $(".modal-body");
+    let modalTitle = $(".modal-title");
+    let modalHeader = $(".modal-header");
 
-    modalContainer.classList.add("is-visible");
-  }
+    modalTitle.empty();
+    modalBody.empty();
 
-  // Close the modal when the close button is clicked
-  document.querySelector(".close").addEventListener("click", function () {
-    hideModal();
-  });
+    let nameElement = $("<h1>" + item.name + "</h1>");
 
-  // Close the modal when clicking outside the modal container
-  window.addEventListener("click", function (event) {
-    let modalContainer = document.getElementById("modal-container");
-    if (event.target === modalContainer) {
-      hideModal();
-    }
-  });
+    let imageElementFront = $('<img class="modal-img" style="width:50%">');
 
-  // Function to hide the modal
-  function hideModal() {
-    let modalContainer = document.getElementById("modal-container");
-    modalContainer.classList.remove("is-visible");
+    imageElementFront.attr("src", item.imageUrlFront);
+
+    let imageElementBack = $('<img class="modal-img" style="width:50%">');
+    imageElementBack.attr("src", item.imageUrlBack);
+
+    let heightElement = $("<p>" + "height: " + item.height + "</p>");
+
+    let weightElement = $("<p>" + "weight: " + item.weight + "</p>");
+
+    modalTitle.append(nameElement);
+    modalBody.append(imageElementFront);
+    modalBody.append(imageElementBack);
+    modalBody.append(heightElement);
+    modalBody.append(weightElement);
   }
   // ------------------- Loading Section (ux) -------------
 
