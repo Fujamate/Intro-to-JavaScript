@@ -13,17 +13,76 @@
     />
   </head>
   <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"><img src="./src/Pokemon.svg" /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Pokemon List <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Search</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- displays the UX for the fetching -->
     <div id="loading-message">Loading...</div>
-    <div id="modal" class="modal">
-      <div id="modal-container" class="modal-container">
-        <span class="close">&times;</span>
-        <h2 id="modal-name"></h2>
-        <p id="modal-height"></p>
-        <img id="modal-image" src="#" alt="" />
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="pokemonModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="pokemonModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pokemonModalLabel">Modal title</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <ul class="pokemon-list"></ul>
+    <ul class="list-group pokemon-list"></ul>
+
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
